@@ -1,0 +1,20 @@
+# Qt Creator machine-specific settings
+.qtcreator/
+*.user
+*.user.*
+# Generated build output
+build/
+build-*/
+debug/
+release/
+.qmake.stash
+Makefile*
+ui_*.h
+moc_*.cpp
+qrc_*.cpp
+*.o
+*.obj
+*.exe
+*.dll
+# Original local backup
+*.zip

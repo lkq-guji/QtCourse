@@ -1,9 +1,0 @@
-QT += widgets testlib
-CONFIG += testcase console c++17
-TEMPLATE = app
-TARGET = about_test
-INCLUDEPATH += ..
-SOURCES += about_test.cpp ../qwmainwind.cpp
-HEADERS += ../qwmainwind.h
-FORMS += ../qwmainwind.ui
-RESOURCES += ../res.qrc

@@ -18,3 +18,11 @@ qrc_*.cpp
 *.dll
 # Original local backup
 *.zip
+
+# main 分支维护概览，作业目录在各自分支维护。
+/samp2_4App/
+/samp4_13TableWidget/
+/docs/
+/worktrees/
+/*.xls
+/*.docx

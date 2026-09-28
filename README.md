@@ -33,6 +33,6 @@ git switch chapter02-about
 
 第二章展示 QAction、信号与槽、资源文件和 QMessageBox。原有提交历史以及已经填写的个人信息保留在 `chapter02-about`。
 
-第四章以提供的 `samp4_13TableWidget` 工程完成题目所称的 samp4_9 表格任务。最终名单按后续指定改为刘楷钦、刘泽、龙智森、罗宇丰、许沣睿。数据来源、实现讲解和验证结果见该分支 README。
+第四章以提供的 `samp4_13TableWidget` 工程完成题目所称的 samp4_9 表格任务。数据来源、实现讲解和验证结果见该分支 README。
 
 各作业分支保存可重新构建的源码。构建目录、Qt Creator 个人配置和整份原始点名册保留在本地。主分支调整采用正常提交，保留历史，无需强制推送。

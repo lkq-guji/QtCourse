@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/data">
+        <file alias="students.json">data/students.json</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>icons/yes.bmp</file>
+        <file>icons/no.bmp</file>
+        <file>icons/girl.ico</file>
+        <file>icons/boy.ico</file>
+    </qresource>
+</RCC>

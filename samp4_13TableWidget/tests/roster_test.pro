@@ -1,0 +1,9 @@
+QT += widgets testlib
+CONFIG += testcase console c++11
+TEMPLATE = app
+TARGET = roster_test
+INCLUDEPATH += ..
+SOURCES += roster_test.cpp ../mainwindow.cpp
+HEADERS += ../mainwindow.h
+FORMS += ../mainwindow.ui
+RESOURCES += ../res.qrc

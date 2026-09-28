@@ -112,17 +112,3 @@ QString birthplace = nameItem->data(Qt::UserRole + 1).toString();
 本地上传工作区为 `QT/worktrees/chapter04-tablewidget`。原 `QT/samp4_13TableWidget` 中修改后的项目和它自带的 `.git` 记录都保留。本次上传复制源文件进入独立工作区，不会把嵌套仓库误上传成子模块。
 
 后续在上传工作区修改后，用 `git add`、`git commit`、`git push` 更新这个分支。如果修改的是外层原项目，需先把更改同步到上传工作区，再提交。
-
-## 运行截图
-
-点击按钮前：
-
-![点击前](docs/before.png)
-
-点击按钮后：
-
-![五人名单](docs/after.png)
-
-选择一行后，状态栏显示对应学生和籍贯：
-
-![行选择和籍贯状态栏](docs/selected-row.png)

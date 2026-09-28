@@ -1,4 +1,4 @@
-#include "qwmainwind.h"
+﻿#include "qwmainwind.h"
 #include "ui_qwmainwind.h"
 
 #include    <QFile>
@@ -65,9 +65,9 @@ void QWMainWind::iniSignalSlots()
 void QWMainWind::on_actAbout_triggered()
 {
     // 在这里填写自己的信息；重新构建后即可显示在 About 窗口中。
-    const QString name = tr("待填写姓名");
-    const QString studentId = tr("待填写学号");
-    const QString className = tr("待填写专业 / 班级");
+    const QString name = tr("刘楷钦");
+    const QString studentId = tr("2024414290221");
+    const QString className = tr("24级软件工程2班");
 
     QMessageBox aboutBox(this);
     aboutBox.setWindowTitle(tr("关于 / About"));

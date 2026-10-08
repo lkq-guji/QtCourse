@@ -9,7 +9,7 @@
 | [main](https://github.com/lkq-guji/QtCourse/tree/main) | 概览和分支导航 | 无 |
 | [chapter02-about](https://github.com/lkq-guji/QtCourse/tree/chapter02-about) | 工具栏 About 按钮、个人信息弹窗 | `samp2_4App/samp2_4.pro` |
 | [chapter04-tablewidget](https://github.com/lkq-guji/QtCourse/tree/chapter04-tablewidget) | 五人七列表格、本人红色粗体、籍贯关联与状态栏 | `samp4_13TableWidget/samp4_13.pro` |
-| [experiment01-calculator](https://github.com/lkq-guji/QtCourse/tree/experiment01-calculator) | 实验一：键盘计算器、回归测试、实验报告和150秒视频 | `calculator/calculator.pro` |
+| [experiment01-calculator](https://github.com/lkq-guji/QtCourse/tree/experiment01-calculator) | 实验一：键盘计算器、回归测试、实验报告 | `calculator/calculator.pro` |
 
 ## 下载和运行
 

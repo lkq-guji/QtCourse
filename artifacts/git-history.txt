@@ -1,0 +1,7 @@
+4bac0a4 Create Designer calculator form with named controls and layouts
+734d2f2 Implement shared operand state machine and mouse commands
+5f4c80f Add arithmetic and keyboard boundary regression tests
+2ccf7f8 Route keyboard events and mouse clicks through the same commands
+3423e29 Fix signed result expression and guard keyboard focus regressions
+03f7180 Style Designer controls and expose accessible calculation feedback
+e7a1ba6 Add continuous real-event demonstration and final test evidence

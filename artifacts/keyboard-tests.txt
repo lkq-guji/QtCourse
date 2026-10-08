@@ -1,0 +1,33 @@
+********* Start testing of CalculatorTest *********
+Config: Using QtTest library 6.11.1, Qt 6.11.1 (x86_64-little_endian-llp64 shared (dynamic) release build; by GCC 13.1.0), windows 11
+PASS   : CalculatorTest::initTestCase()
+PASS   : CalculatorTest::operations(addition)
+PASS   : CalculatorTest::operations(subtract)
+PASS   : CalculatorTest::operations(multiply)
+PASS   : CalculatorTest::operations(divide)
+PASS   : CalculatorTest::operations(decimal)
+PASS   : CalculatorTest::operations(duplicate-point)
+PASS   : CalculatorTest::operations(replace-operator)
+PASS   : CalculatorTest::operations(sequential)
+PASS   : CalculatorTest::operations(repeat-equals)
+PASS   : CalculatorTest::operations(new-input-after-result)
+PASS   : CalculatorTest::operations(continue-after-result)
+PASS   : CalculatorTest::operations(backspace)
+PASS   : CalculatorTest::operations(backspace-empty)
+PASS   : CalculatorTest::operations(backspace-waiting)
+PASS   : CalculatorTest::operations(clear-entry)
+PASS   : CalculatorTest::operations(clear-all)
+PASS   : CalculatorTest::operations(divide-zero)
+PASS   : CalculatorTest::operations(recover-from-error)
+PASS   : CalculatorTest::operations(negative-right)
+PASS   : CalculatorTest::operations(missing-right)
+PASS   : CalculatorTest::keyboardDecimal()
+PASS   : CalculatorTest::keyboardBackspaceAndClear()
+PASS   : CalculatorTest::mixedInput()
+FAIL!  : CalculatorTest::signedResultExpression() Compared values are not the same
+   Actual   (engine.expression()): "2 + 3 ="
+   Expected (QString("−(5)"))  : "\u2212(5)"
+..\..\tests\calculator_test.cpp(84) : failure location
+PASS   : CalculatorTest::cleanupTestCase()
+Totals: 25 passed, 1 failed, 0 skipped, 0 blacklisted, 721ms
+********* Finished testing of CalculatorTest *********

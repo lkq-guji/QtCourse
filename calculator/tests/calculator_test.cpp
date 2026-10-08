@@ -83,6 +83,35 @@ private slots:
         QCOMPARE(engine.display(), QString("-5"));
         QCOMPARE(engine.expression(), QString("−(5)"));
     }
+    void keyboardAfterMouseFocus()
+    {
+        CalculatorWindow window;
+        window.show();
+        auto *button = window.findChild<QPushButton *>("btn2");
+        auto *display = window.findChild<QLineEdit *>("displayEdit");
+        QTest::mouseClick(button, Qt::LeftButton);
+        QTest::keyClicks(button, "+3");
+        QTest::keyClick(button, Qt::Key_Return);
+        QCOMPARE(display->text(), QString("5"));
+        QTest::keyClick(button, Qt::Key_Enter, Qt::KeypadModifier);
+        QCOMPARE(display->text(), QString("8"));
+    }
+    void captureScreenshots()
+    {
+        CalculatorWindow window;
+        window.show();
+        QVERIFY(QTest::qWaitForWindowExposed(&window));
+        auto *display = window.findChild<QLineEdit *>("displayEdit");
+        QTest::keyClicks(display, "12.5+3.75");
+        QTest::keyClick(display, Qt::Key_Return);
+        QTest::qWait(80);
+        QVERIFY(window.grab().save("calculation.png"));
+        QTest::keyClick(display, Qt::Key_Escape);
+        QTest::keyClicks(display, "8/0");
+        QTest::keyClick(display, Qt::Key_Return);
+        QTest::qWait(80);
+        QVERIFY(window.grab().save("division-error.png"));
+    }
 };
 QTEST_MAIN(CalculatorTest)
 #include "calculator_test.moc"

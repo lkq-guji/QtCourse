@@ -82,7 +82,9 @@ void CalculatorEngine::input(const QString &command)
     }
     if (command == "SIGN") {
         if (currentState == State::WaitingOperand) { entry = "0"; currentState = State::Entering; }
+        const QString previousEntry = entry;
         entry = entry.startsWith('-') ? entry.mid(1) : "-" + entry;
+        if (currentState == State::Result) expressionText = QStringLiteral("−(%1)").arg(previousEntry);
         lastOperator.clear();
         return;
     }

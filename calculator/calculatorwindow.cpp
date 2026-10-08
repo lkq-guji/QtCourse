@@ -4,10 +4,13 @@
 #include <QApplication>
 #include <QKeyEvent>
 #include <QStyle>
+#include <QFile>
 CalculatorWindow::CalculatorWindow(QWidget *parent)
     : QWidget(parent), ui(new Ui::CalculatorWindow)
 {
     ui->setupUi(this);
+    QFile stylesheet(":/styles/calculator.qss");
+    if (stylesheet.open(QIODevice::ReadOnly)) setStyleSheet(QString::fromUtf8(stylesheet.readAll()));
     qApp->installEventFilter(this);
     for (auto *button : findChildren<QPushButton *>()) {
         button->setFocusPolicy(Qt::NoFocus);

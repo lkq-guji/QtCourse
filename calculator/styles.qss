@@ -1,0 +1,17 @@
+QWidget#CalculatorWindow { background: #f4f6f9; font-family: "Microsoft YaHei UI"; }
+QLabel#titleLabel { color: #172b4d; font-size: 22px; font-weight: 600; padding: 6px 4px; }
+QLabel#expressionLabel { color: #53657d; font-size: 16px; padding-right: 10px; }
+QLineEdit#displayEdit { background: #ffffff; color: #102a43; border: 1px solid #d5dde8;
+    border-radius: 10px; padding: 8px 12px; selection-background-color: #c4dcff; }
+QLineEdit#displayEdit[error="true"] { color: #ac2525; border-color: #d89696; font-size: 27px; }
+QPushButton { background: #ffffff; color: #102a43; border: 1px solid #d8e0eb;
+    border-radius: 9px; font-size: 23px; padding: 5px; }
+QPushButton:hover { background: #eaf2ff; border-color: #95b6e5; }
+QPushButton:pressed { background: #cedff7; }
+QPushButton#btnAdd, QPushButton#btnSubtract, QPushButton#btnMultiply, QPushButton#btnDivide {
+    background: #e4edfa; color: #234e81; font-size: 27px; }
+QPushButton#btnEquals { background: #245da8; color: #ffffff; border-color: #245da8; }
+QPushButton#btnEquals:hover { background: #1b4c8d; }
+QPushButton#btnEquals:pressed { background: #143b70; }
+QPushButton#btnClearEntry, QPushButton#btnClearAll, QPushButton#btnBackspace { font-size: 19px; color: #53657d; }
+QLabel#hintLabel, QLabel#identityLabel { color: #66788e; font-size: 12px; padding: 3px; }

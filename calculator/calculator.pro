@@ -5,3 +5,4 @@ TEMPLATE = app
 SOURCES += main.cpp calculatorwindow.cpp calculatorengine.cpp
 HEADERS += calculatorwindow.h calculatorengine.h
 FORMS += calculatorwindow.ui
+RESOURCES += resources.qrc

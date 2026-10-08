@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0"><class>CalculatorWindow</class><widget class="QWidget" name="CalculatorWindow">
+<property name="geometry"><rect><x>0</x><y>0</y><width>420</width><height>600</height></rect></property>
+<property name="minimumSize"><size><width>360</width><height>520</height></size></property>
+<property name="windowTitle"><string>实验一 · 带键盘事件的计算器</string></property>
+<layout class="QVBoxLayout" name="mainLayout">
+<property name="spacing"><number>12</number></property>
+<item><widget class="QLabel" name="titleLabel"><property name="text"><string>标准计算器</string></property></widget></item>
+<item><widget class="QLabel" name="expressionLabel"><property name="text"><string>逐步运算 · 支持键盘</string></property><property name="alignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property><property name="minimumSize"><size><width>0</width><height>30</height></size></property></widget></item>
+<item><widget class="QLineEdit" name="displayEdit"><property name="readOnly"><bool>true</bool></property><property name="text"><string>0</string></property><property name="alignment"><set>Qt::AlignRight</set></property><property name="minimumSize"><size><width>0</width><height>80</height></size></property><property name="font"><font><pointsize>28</pointsize></font></property></widget></item>
+<item><layout class="QGridLayout" name="buttonGrid"><property name="spacing"><number>8</number></property>
+<item row="0" column="0"><widget class="QPushButton" name="btnClearEntry">
+<property name="text"><string>CE</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>CE</string></property>
+</widget></item><item row="0" column="1"><widget class="QPushButton" name="btnClearAll">
+<property name="text"><string>C</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>C</string></property>
+</widget></item><item row="0" column="2"><widget class="QPushButton" name="btnBackspace">
+<property name="text"><string>⌫</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>BS</string></property>
+</widget></item><item row="0" column="3"><widget class="QPushButton" name="btnDivide">
+<property name="text"><string>÷</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>/</string></property>
+</widget></item><item row="1" column="0"><widget class="QPushButton" name="btn7">
+<property name="text"><string>7</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>7</string></property>
+</widget></item><item row="1" column="1"><widget class="QPushButton" name="btn8">
+<property name="text"><string>8</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>8</string></property>
+</widget></item><item row="1" column="2"><widget class="QPushButton" name="btn9">
+<property name="text"><string>9</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>9</string></property>
+</widget></item><item row="1" column="3"><widget class="QPushButton" name="btnMultiply">
+<property name="text"><string>×</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>*</string></property>
+</widget></item><item row="2" column="0"><widget class="QPushButton" name="btn4">
+<property name="text"><string>4</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>4</string></property>
+</widget></item><item row="2" column="1"><widget class="QPushButton" name="btn5">
+<property name="text"><string>5</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>5</string></property>
+</widget></item><item row="2" column="2"><widget class="QPushButton" name="btn6">
+<property name="text"><string>6</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>6</string></property>
+</widget></item><item row="2" column="3"><widget class="QPushButton" name="btnSubtract">
+<property name="text"><string>−</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>-</string></property>
+</widget></item><item row="3" column="0"><widget class="QPushButton" name="btn1">
+<property name="text"><string>1</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>1</string></property>
+</widget></item><item row="3" column="1"><widget class="QPushButton" name="btn2">
+<property name="text"><string>2</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>2</string></property>
+</widget></item><item row="3" column="2"><widget class="QPushButton" name="btn3">
+<property name="text"><string>3</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>3</string></property>
+</widget></item><item row="3" column="3"><widget class="QPushButton" name="btnAdd">
+<property name="text"><string>+</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>+</string></property>
+</widget></item><item row="4" column="0"><widget class="QPushButton" name="btnSign">
+<property name="text"><string>±</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>SIGN</string></property>
+</widget></item><item row="4" column="1"><widget class="QPushButton" name="btn0">
+<property name="text"><string>0</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>0</string></property>
+</widget></item><item row="4" column="2"><widget class="QPushButton" name="btnPoint">
+<property name="text"><string>.</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>.</string></property>
+</widget></item><item row="4" column="3"><widget class="QPushButton" name="btnEquals">
+<property name="text"><string>=</string></property>
+<property name="minimumSize"><size><width>64</width><height>58</height></size></property>
+<property name="sizePolicy"><sizepolicy hsizetype="Expanding" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>0</verstretch></sizepolicy></property>
+<property name="command" stdset="0"><string>=</string></property>
+</widget></item></layout></item>
+<item><widget class="QLabel" name="hintLabel"><property name="text"><string>Enter 计算   Backspace 退格   Esc 清除</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+<item><widget class="QLabel" name="identityLabel"><property name="text"><string>刘楷钦  ·  2024414290221</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+</layout></widget><resources/><connections/></ui>

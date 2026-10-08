@@ -1,0 +1,9 @@
+QT += widgets testlib
+CONFIG += console c++17
+TARGET = calculator_demo
+TEMPLATE = app
+INCLUDEPATH += ..
+SOURCES += demo.cpp ../calculatorwindow.cpp ../calculatorengine.cpp
+HEADERS += ../calculatorwindow.h ../calculatorengine.h
+FORMS += ../calculatorwindow.ui
+RESOURCES += ../resources.qrc

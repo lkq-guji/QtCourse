@@ -2,7 +2,7 @@
 
 刘楷钦，2024414290221，软件工程2班。Windows 11 / Qt 6.11.1 / MinGW 13.1.0。
 
-本分支包含 Designer 可编辑的界面、计算状态机、Qt Test、150秒连续测试视频和填写完成的实验报告。
+本分支包含 Designer 可编辑的计算器界面、计算状态机和 Qt Test 测试代码。
 
 ## 打开和运行
 
@@ -41,27 +41,10 @@
 
 在 Qt Creator 打开 `calculator/tests/tests.pro`，构建并运行，覆盖状态机与真实窗口交互。
 
-| 日志（仓库 artifacts 目录） | 通过 | 失败 | 阶段 |
-| --- | --- | --- | --- |
-| baseline-tests.txt | 22 | 4 | 键盘未接入，结果取反后算式未更新 |
-| keyboard-tests.txt | 25 | 1 | 键盘接入后，剩余算式显示问题 |
-| fixed-tests.txt | 28 | 0 | 修复算式后，增加焦点和截图测试 |
-| final-tests.txt | 28 | 0 | 样式完成后的最终回归 |
-
-报告列出四个真实问题的输入、旧现象、原因、修改和结果，原始失败日志保留。
-
-## 报告和视频
-
-仓库根目录下：
-
-- `deliverables/实验1报告_刘楷钦_2024414290221.docx`：沿用学校模板，填写设计、代码、问题分析、真实提交、AI辅助过程和总结。教师评语与成绩留空。
-- `artifacts/calculator-demo.mp4`：150秒、1120×780、H.264、无音轨。展示鼠标小数、键盘、退格清除、除零恢复、连续运算、异常输入和录制时的Git历史。
-- `deliverables/实验1提交包_刘楷钦_2024414290221.zip`：源码、报告、视频及日志的本地提交包，不在Git中重复上传压缩包。视频可单独上传作业系统附件。
-
-视频由 `calculator/demo/demo.pro` 演示工具通过 Qt Test 发送真实鼠标键盘事件，连续捕获实际 QWidget。右侧文字记录每步操作，不是预制截图拼接。
+测试覆盖四则运算、小数输入、重复小数点、连续操作符、退格、清除、除零恢复、结果后继续输入以及鼠标与键盘混合操作。
 
 ## Git 分支
 
-本次分支为 [experiment01-calculator](https://github.com/lkq-guji/QtCourse/tree/experiment01-calculator)，逐步提交界面、引擎、测试、键盘、修复、样式和验证证据。
+本次分支为 [experiment01-calculator](https://github.com/lkq-guji/QtCourse/tree/experiment01-calculator)，逐步提交界面、引擎、测试、键盘、修复和样式。
 
 本机上传目录为 `QT/worktrees/experiment01-calculator`，在这里修改后用 `git add`、`git commit`、`git push` 更新本实验。[main](https://github.com/lkq-guji/QtCourse/tree/main) 维护导航。

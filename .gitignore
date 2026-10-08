@@ -26,6 +26,7 @@ qrc_*.cpp
 /worktrees/
 /*.xls
 /*.docx
-# Local video QA frames and submission archive.
-artifacts/video-*-check.png
-deliverables/*.zip
+
+# Local reports and generated evidence are not published.
+/artifacts/
+/deliverables/

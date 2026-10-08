@@ -323,7 +323,7 @@
     <iconset resource="res.qrc"><normaloff>:/images/icons/boy.ico</normaloff>:/images/icons/boy.ico</iconset>
    </property>
    <property name="text"><string>设置学生名单</string></property>
-   <property name="toolTip"><string>载入刘楷钦、刘泽、龙智森、罗宇丰、许沣睿</string></property>
+   <property name="toolTip"><string>载入刘楷钦及点名册中前后各两位同学，共五人</string></property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

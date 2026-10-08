@@ -34,8 +34,8 @@ private slots:
         QCOMPARE(table->rowCount(), 5);
         QCOMPARE(table->columnCount(), 7);
         const QStringList headers = {"学号", "姓名", "性别", "行政班级", "院系", "专业", "修读性质"};
-        const QStringList ids = {"2024414290221", "2024414290223", "2024414290224", "2024414290229", "2024414290239"};
-        const QStringList names = {"刘楷钦", "刘泽", "龙智森", "罗宇丰", "许沣睿"};
+        const QStringList ids = {"2024414290219", "2024414290220", "2024414290221", "2024414290223", "2024414290224"};
+        const QStringList names = {"林泳恩", "刘楚彤", "刘楷钦", "刘泽", "龙智森"};
         for (int col = 0; col < 7; ++col)
             QCOMPARE(table->horizontalHeaderItem(col)->text(), headers.at(col));
         for (int row = 0; row < 5; ++row) {
@@ -43,16 +43,16 @@ private slots:
             for (int col = 0; col < 7; ++col) {
                 QVERIFY(table->item(row,col));
                 QCOMPARE(table->item(row,col)->text(), values.at(col));
-                const bool highlight = row == 0 && col < 2;
+                const bool highlight = row == 2 && col < 2;
                 QCOMPARE(table->item(row,col)->font().bold(), highlight);
                 QCOMPARE(table->item(row,col)->foreground().color() == QColor(Qt::red), highlight);
             }
-            QCOMPARE(table->item(row,1)->data(Qt::UserRole + 1).toString(), QString("未提供"));
+            QCOMPARE(table->item(row,1)->data(Qt::UserRole + 1).toString(), QString("广东东莞"));
             //点击专业列，仍然显示该行姓名 item 关联的籍贯。
             QTest::mouseClick(table->viewport(), Qt::LeftButton, Qt::NoModifier,
                              table->visualItemRect(table->item(row,5)).center());
             QVERIFY(label->text().contains(names.at(row)));
-            QVERIFY(label->text().contains("未提供"));
+            QVERIFY(label->text().contains("广东东莞"));
             QVERIFY(idLabel->text().contains(ids.at(row)));
         }
         //测试数据仅存在于内存，证明状态栏确实读取 UserRole + 1。
@@ -65,14 +65,15 @@ private slots:
         table->clearSelection(); //取消选中，截图能清晰看到红色字体。
         QVERIFY(window.grab().save("after.png"));
         window.findChild<QRadioButton *>("rBtnSelectRow")->click();
-        table->setCurrentCell(3,2);
-        QVERIFY(label->text().contains("罗宇丰"));
+        table->setCurrentCell(2,2);
+        QVERIFY(label->text().contains("刘楷钦"));
+        QVERIFY(label->text().contains("广东东莞"));
         QVERIFY(window.grab().save("selected-row.png"));
 
         auto click = [&](const char *name) { window.findChild<QPushButton *>(name)->click(); };
         click("btnReadToEdit");
         const auto text = window.findChild<QPlainTextEdit *>("textEdit")->toPlainText();
-        QVERIFY(text.contains("许沣睿"));
+        QVERIFY(text.contains("龙智森"));
         QVERIFY(text.contains("初修"));
         QVERIFY(!text.contains("群众"));
         click("btnAppendRow");

@@ -2,14 +2,34 @@
   "source": "周四点名册.xls",
   "sheet": "Sheet1",
   "sourceRows": [
+    57,
+    58,
     59,
     60,
-    61,
-    66,
-    74
+    61
   ],
-  "note": "按用户后续指定的五人名单排列。学号、姓名、班级来自点名册；性别、院系、修读性质由用户补充；专业按软件班填写为软件工程；籍贯未提供。",
+  "note": "学号、姓名、班级取自点名册中刘楷钦前后各两行，保持原顺序；性别、院系、专业、修读性质沿用课程设置；五人籍贯按用户要求统一为广东东莞。",
   "students": [
+    {
+      "studentId": "2024414290219",
+      "name": "林泳恩",
+      "gender": "男",
+      "className": "2024软件2班",
+      "department": "计算机科学与技术学院",
+      "major": "软件工程",
+      "studyType": "初修",
+      "birthplace": "广东东莞"
+    },
+    {
+      "studentId": "2024414290220",
+      "name": "刘楚彤",
+      "gender": "男",
+      "className": "2024软件2班",
+      "department": "计算机科学与技术学院",
+      "major": "软件工程",
+      "studyType": "初修",
+      "birthplace": "广东东莞"
+    },
     {
       "studentId": "2024414290221",
       "name": "刘楷钦",
@@ -18,7 +38,7 @@
       "department": "计算机科学与技术学院",
       "major": "软件工程",
       "studyType": "初修",
-      "birthplace": "未提供"
+      "birthplace": "广东东莞"
     },
     {
       "studentId": "2024414290223",
@@ -28,7 +48,7 @@
       "department": "计算机科学与技术学院",
       "major": "软件工程",
       "studyType": "初修",
-      "birthplace": "未提供"
+      "birthplace": "广东东莞"
     },
     {
       "studentId": "2024414290224",
@@ -38,27 +58,7 @@
       "department": "计算机科学与技术学院",
       "major": "软件工程",
       "studyType": "初修",
-      "birthplace": "未提供"
-    },
-    {
-      "studentId": "2024414290229",
-      "name": "罗宇丰",
-      "gender": "男",
-      "className": "2024软件2班",
-      "department": "计算机科学与技术学院",
-      "major": "软件工程",
-      "studyType": "初修",
-      "birthplace": "未提供"
-    },
-    {
-      "studentId": "2024414290239",
-      "name": "许沣睿",
-      "gender": "男",
-      "className": "2024软件2班",
-      "department": "计算机科学与技术学院",
-      "major": "软件工程",
-      "studyType": "初修",
-      "birthplace": "未提供"
+      "birthplace": "广东东莞"
     }
   ]
 }

@@ -13,5 +13,9 @@ QPushButton#btnAdd, QPushButton#btnSubtract, QPushButton#btnMultiply, QPushButto
 QPushButton#btnEquals { background: #245da8; color: #ffffff; border-color: #245da8; }
 QPushButton#btnEquals:hover { background: #1b4c8d; }
 QPushButton#btnEquals:pressed { background: #143b70; }
+QPushButton#btnPercent, QPushButton#btnReciprocal, QPushButton#btnSquare, QPushButton#btnSqrt {
+    background: #eef2f8; color: #234e81; font-size: 21px; }
+QPushButton#btnPercent:hover, QPushButton#btnReciprocal:hover, QPushButton#btnSquare:hover, QPushButton#btnSqrt:hover {
+    background: #e4edfa; }
 QPushButton#btnClearEntry, QPushButton#btnClearAll, QPushButton#btnBackspace { font-size: 19px; color: #53657d; }
 QLabel#hintLabel, QLabel#identityLabel { color: #66788e; font-size: 12px; padding: 3px; }

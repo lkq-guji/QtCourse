@@ -20,12 +20,62 @@ void CalculatorEngine::clearAll()
     lastOperator.clear();
     accumulator = lastOperand = 0;
     currentState = State::Entering;
+    transformedEntry = false;
 }
 void CalculatorEngine::beginEntry()
 {
     if (currentState == State::Result || currentState == State::Error) clearAll();
-    if (currentState == State::WaitingOperand) entry = "0";
+    if (currentState == State::WaitingOperand || transformedEntry) {
+        entry = "0";
+        expressionText = pendingOperator.isEmpty() ? QString()
+            : format(accumulator) + " " + symbol(pendingOperator);
+    }
+    transformedEntry = false;
     currentState = State::Entering;
+}
+void CalculatorEngine::fail(const QString &message)
+{
+    entry = message;
+    currentState = State::Error;
+    pendingOperator.clear();
+    lastOperator.clear();
+    transformedEntry = false;
+}
+void CalculatorEngine::applyUnary(const QString &command)
+{
+    const double value = entry.toDouble();
+    double result = value;
+    QString operandExpression;
+    if (command == "RECIP") {
+        operandExpression = QStringLiteral("1/(%1)").arg(entry);
+        if (value == 0) { fail(QStringLiteral("不能除以零")); return; }
+        result = 1.0 / value;
+    } else if (command == "SQUARE") {
+        operandExpression = QStringLiteral("sqr(%1)").arg(entry);
+        result = value * value;
+    } else if (command == "SQRT") {
+        operandExpression = QStringLiteral("√(%1)").arg(entry);
+        if (value < 0) { fail(QStringLiteral("负数不能开平方")); return; }
+        result = std::sqrt(value);
+    } else {
+        // 加减求左操作数的百分比；乘除（以及单独使用）把当前项除以100。
+        result = value / 100.0;
+        if (pendingOperator == "+" || pendingOperator == "-") result *= accumulator;
+        operandExpression = format(result);
+    }
+    if (!std::isfinite(result)) { fail(QStringLiteral("结果超出范围")); return; }
+    entry = format(result);
+    lastOperator.clear();
+    if (pendingOperator.isEmpty()) {
+        accumulator = result;
+        expressionText = operandExpression;
+        currentState = State::Result;
+    } else {
+        // 只变换右操作数，不提前执行待处理的二元运算。
+        expressionText = format(accumulator) + " " + symbol(pendingOperator) + " " + operandExpression;
+        currentState = State::Entering;
+    }
+    transformedEntry = true;
 }
 bool CalculatorEngine::calculate(double right, const QString &op)
 {
@@ -70,12 +120,21 @@ void CalculatorEngine::input(const QString &command)
     }
     if (command == "CE") {
         if (currentState == State::Result || currentState == State::Error) clearAll();
-        else { entry = "0"; currentState = State::Entering; lastOperator.clear(); }
+        else {
+            entry = "0"; currentState = State::Entering; lastOperator.clear();
+            transformedEntry = false;
+            expressionText = pendingOperator.isEmpty() ? QString()
+                : format(accumulator) + " " + symbol(pendingOperator);
+        }
         return;
     }
     if (currentState == State::Error) return;
+    if (command == "RECIP" || command == "SQUARE" || command == "SQRT" || command == "%") {
+        applyUnary(command);
+        return;
+    }
     if (command == "BS") {
-        if (currentState != State::Entering) return; //不改写已经确认的左操作数或计算结果。
+        if (currentState != State::Entering || transformedEntry) return; //不改写已确认的数值。
         entry.chop(1);
         if (entry.isEmpty() || entry == "-") entry = "0";
         return;
@@ -93,12 +152,14 @@ void CalculatorEngine::input(const QString &command)
             if (!calculate(entry.toDouble(), pendingOperator)) return;
         } else accumulator = entry.toDouble();
         pendingOperator = command;
+        transformedEntry = false;
         lastOperator.clear();
         expressionText = format(accumulator) + " " + symbol(command);
         currentState = State::WaitingOperand;
         return;
     }
     if (command == "=") {
+        transformedEntry = false;
         if (!pendingOperator.isEmpty()) {
             if (currentState == State::WaitingOperand) return; //缺少右操作数时等待输入。
             const double right = entry.toDouble();

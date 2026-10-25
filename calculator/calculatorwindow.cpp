@@ -33,8 +33,11 @@ bool CalculatorWindow::eventFilter(QObject *watched, QEvent *event)
     else if (key->key() == Qt::Key_Escape || key->key() == Qt::Key_C) command = "C";
     else if (key->key() == Qt::Key_Delete) command = "CE";
     else if (key->key() == Qt::Key_F9) command = "SIGN";
+    else if (key->key() == Qt::Key_R) command = "RECIP";
+    else if (key->key() == Qt::Key_Q) command = "SQUARE";
+    else if (key->key() == Qt::Key_S) command = "SQRT";
     else if (key->text() == "," || key->text() == ".") command = ".";
-    else if (key->text().size() == 1 && QString("0123456789+-*/").contains(key->text())) command = key->text();
+    else if (key->text().size() == 1 && QString("0123456789+-*/%").contains(key->text())) command = key->text();
     if (command.isEmpty()) return false;
     key->accept();
     // ShortcutOverride 只声明接管按键；KeyPress 才执行，避免一次按键计算两次。

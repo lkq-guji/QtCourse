@@ -26,3 +26,7 @@ qrc_*.cpp
 /worktrees/
 /*.xls
 /*.docx
+
+/artifacts/
+/deliverables/
+/视频教学/

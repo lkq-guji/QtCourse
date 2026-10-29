@@ -12,7 +12,10 @@ public:
     void paintLineNumbers(QPaintEvent *event);
     void setTextBackgroundColor(const QColor &color);
     void setEditorColors(const QColor &foreground, const QColor &background);
+signals:
+    void copyRequested(bool cut);
 protected:
+    void keyPressEvent(QKeyEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     void changeEvent(QEvent *event) override;
 private:

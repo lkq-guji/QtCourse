@@ -23,6 +23,7 @@
 #include <QRadioButton>
 #include <QLineEdit>
 #include <QSignalBlocker>
+#include <QMenu>
 
 MainWindow::MainWindow(const QString &backupRoot, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -46,8 +47,15 @@ MainWindow::MainWindow(const QString &backupRoot, QWidget *parent)
     connect(ui->actionExit, &QAction::triggered, qApp, &QApplication::closeAllWindows);
     connect(ui->actionUndo, &QAction::triggered, editor(), &QPlainTextEdit::undo);
     connect(ui->actionRedo, &QAction::triggered, editor(), &QPlainTextEdit::redo);
-    connect(ui->actionCut, &QAction::triggered, editor(), &QPlainTextEdit::cut);
-    connect(ui->actionCopy, &QAction::triggered, editor(), &QPlainTextEdit::copy);
+    connect(ui->actionCut, &QAction::triggered, this, [this] { copySelection(true); });
+    connect(ui->actionCopy, &QAction::triggered, this, [this] { copySelection(false); });
+    connect(editor(), &CodeEditor::copyRequested, this, [this](bool cut) { copySelection(cut); });
+    editor()->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(editor(), &QWidget::customContextMenuRequested, this, [this](const QPoint &point) {
+        QMenu menu(this);menu.addActions({ui->actionUndo, ui->actionRedo});menu.addSeparator();
+        menu.addActions({ui->actionCut, ui->actionCopy, ui->actionPaste});menu.addSeparator();
+        menu.addAction(ui->actionSelectAll);menu.exec(editor()->mapToGlobal(point));
+    });
     connect(ui->actionPaste, &QAction::triggered, editor(), &QPlainTextEdit::paste);
     connect(ui->actionSelectAll, &QAction::triggered, editor(), &QPlainTextEdit::selectAll);
     connect(ui->actionFind, &QAction::triggered, this, [this] { showSearch(false); });
@@ -95,6 +103,26 @@ MainWindow::MainWindow(const QString &backupRoot, QWidget *parent)
 }
 MainWindow::~MainWindow() = default;
 CodeEditor *MainWindow::editor() const { return ui->editor; }
+void MainWindow::copySelection(bool cut, const QString &text, QTextCursor cursor, int revision, int attempt)
+{
+    if (attempt == 0) {
+        cursor = editor()->textCursor();
+        if (!cursor.hasSelection() || (cut && editor()->isReadOnly())) return;
+        revision = editor()->document()->revision();
+    }
+    const QString payload = attempt == 0 ? cursor.selectedText().replace(QChar::ParagraphSeparator, QLatin1Char('\n')) : text;
+    qApp->clipboard()->setText(payload);
+    if (qApp->clipboard()->text() == payload) {
+        // 只有复制成功且文档没有被后续操作修改，才允许删除原选区。
+        if (cut && editor()->document()->revision() == revision && !editor()->isReadOnly()) cursor.removeSelectedText();
+        updateState();return;
+    }
+    if (attempt < 4) {
+        QTimer::singleShot(50, this, [this, cut, payload, cursor, revision, attempt] {
+            copySelection(cut, payload, cursor, revision, attempt + 1);
+        });
+    } else ui->statusbar->showMessage("剪贴板暂不可用，原选中文字已保留，请重试。", 5000);
+}
 void MainWindow::updateState()
 {
     const bool selected = editor()->textCursor().hasSelection();

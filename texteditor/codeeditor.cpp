@@ -2,6 +2,7 @@
 #include <QPainter>
 #include <QTextBlock>
 #include <QResizeEvent>
+#include <QKeyEvent>
 // 行号只绘制可见的文本块；滚动时跟随 viewport 更新。
 class LineNumberArea : public QWidget
 {
@@ -40,6 +41,13 @@ void CodeEditor::updateMargins()
     numberArea->update();
 }
 void CodeEditor::setLineNumbersVisible(bool visible) { numbersVisible = visible; updateMargins(); }
+void CodeEditor::keyPressEvent(QKeyEvent *event)
+{
+    if (event->matches(QKeySequence::Copy) || event->matches(QKeySequence::Cut)) {
+        emit copyRequested(event->matches(QKeySequence::Cut));event->accept();return;
+    }
+    QPlainTextEdit::keyPressEvent(event);
+}
 void CodeEditor::resizeEvent(QResizeEvent *event) { QPlainTextEdit::resizeEvent(event); updateMargins(); }
 void CodeEditor::changeEvent(QEvent *event)
 {

@@ -1,5 +1,6 @@
 #pragma once
 #include <QMainWindow>
+#include <QTextCursor>
 #include <memory>
 class CodeEditor;
 class SearchDialog;
@@ -29,6 +30,7 @@ private:
     QTimer *autoSaveTimer;
     SearchDialog *findDialog = nullptr, *replaceDialog = nullptr;
     void updateState();
+    void copySelection(bool cut, const QString &text = {}, QTextCursor cursor = {}, int revision = -1, int attempt = 0);
     void openDialog();
     bool save();
     bool saveAs();

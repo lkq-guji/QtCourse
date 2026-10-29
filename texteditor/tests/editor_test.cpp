@@ -25,6 +25,14 @@ class EditorTest : public QObject
 {
     Q_OBJECT
     QAction *action(MainWindow &w, const char *name) { return w.findChild<QAction *>(QString("action") + name); }
+    static bool setClipboard(const QString &text)
+    {
+        for (int attempt = 0; attempt < 6; ++attempt) {
+            qApp->clipboard()->setText(text);QTest::qWait(30);
+            if (qApp->clipboard()->text() == text) return true;
+        }
+        return false;
+    }
     static void respond(QMessageBox::StandardButton answer)
     {
         QTimer::singleShot(40, [answer] {
@@ -123,14 +131,14 @@ private slots:
     }
     void actionStatesFollowSelectionAndClipboard()
     {
-        MainWindow w;qApp->clipboard()->setText("");QCoreApplication::processEvents();
+        MainWindow w;QVERIFY(setClipboard(""));
         QVERIFY(!action(w,"Copy")->isEnabled());QVERIFY(!action(w,"Cut")->isEnabled());QVERIFY(!action(w,"Paste")->isEnabled());
         w.editor()->insertPlainText("abc");QVERIFY(action(w,"Undo")->isEnabled());
-        w.editor()->selectAll();QVERIFY(action(w,"Copy")->isEnabled());action(w,"Copy")->trigger();QCOMPARE(qApp->clipboard()->text(),QString("abc"));
-        action(w,"Cut")->trigger();QCOMPARE(w.editor()->toPlainText(),QString());QVERIFY(!action(w,"Copy")->isEnabled());QVERIFY(action(w,"Paste")->isEnabled());
+        w.editor()->selectAll();QVERIFY(action(w,"Copy")->isEnabled());action(w,"Copy")->trigger();QTRY_COMPARE(qApp->clipboard()->text(),QString("abc"));
+        action(w,"Cut")->trigger();QTRY_COMPARE(w.editor()->toPlainText(),QString());QVERIFY(!action(w,"Copy")->isEnabled());QVERIFY(action(w,"Paste")->isEnabled());
         action(w,"Paste")->trigger();QCOMPARE(w.editor()->toPlainText(),QString("abc"));
         action(w,"Undo")->trigger();QVERIFY(action(w,"Redo")->isEnabled());action(w,"Redo")->trigger();QCOMPARE(w.editor()->toPlainText(),QString("abc"));
-        qApp->clipboard()->setText("");QTRY_VERIFY(!action(w,"Paste")->isEnabled());
+        QVERIFY(setClipboard(""));QTRY_VERIFY(!action(w,"Paste")->isEnabled());
     }
     void searchDirectionCaseAndWrap()
     {

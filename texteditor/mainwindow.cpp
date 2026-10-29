@@ -20,6 +20,9 @@
 #include <QDir>
 #include <QUuid>
 #include <QTextBlock>
+#include <QRadioButton>
+#include <QLineEdit>
+#include <QSignalBlocker>
 
 MainWindow::MainWindow(const QString &backupRoot, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -81,7 +84,7 @@ MainWindow::MainWindow(const QString &backupRoot, QWidget *parent)
     connect(editor(), &QPlainTextEdit::undoAvailable, this, &MainWindow::updateState);
     connect(editor(), &QPlainTextEdit::redoAvailable, this, &MainWindow::updateState);
     connect(editor()->document(), &QTextDocument::modificationChanged, this, &MainWindow::updateState);
-    connect(qApp->clipboard(), &QClipboard::dataChanged, this, &MainWindow::updateState);
+    connect(qApp->clipboard(), &QClipboard::dataChanged, this, &MainWindow::updateState, Qt::QueuedConnection);
     const QString folder = backupRoot.isEmpty() ? QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/recovery" : backupRoot;
     recoveryPath = folder + "/backup-" + QUuid::createUuid().toString(QUuid::WithoutBraces) + ".txt";
     autoSaveTimer = new QTimer(this);autoSaveTimer->setObjectName("autoSaveTimer");autoSaveTimer->setInterval(60000);
@@ -96,7 +99,8 @@ void MainWindow::updateState()
 {
     const bool selected = editor()->textCursor().hasSelection();
     ui->actionCopy->setEnabled(selected);ui->actionCut->setEnabled(selected && !editor()->isReadOnly());
-    ui->actionPaste->setEnabled(editor()->canPaste() && !editor()->isReadOnly());
+    const QMimeData *mime = qApp->clipboard()->mimeData();
+    ui->actionPaste->setEnabled(mime && mime->hasText() && !mime->text().isEmpty() && !editor()->isReadOnly());
     ui->actionUndo->setEnabled(editor()->document()->isUndoAvailable());ui->actionRedo->setEnabled(editor()->document()->isRedoAvailable());
     ui->actionSelectAll->setEnabled(!editor()->document()->isEmpty());
     ui->actionSave->setEnabled(editor()->document()->isModified() || filePath.isEmpty());

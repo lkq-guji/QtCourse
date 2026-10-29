@@ -57,7 +57,8 @@ int SearchDialog::replaceOne()
     auto cursor = editor->textCursor();
     const auto cs = ui->caseCheck->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive;
     if (!cursor.hasSelection() || cursor.selectedText().compare(query, cs) != 0) {
-        if (findNext()) message("已定位匹配，点击“替换”执行。");return 0;
+        if (findNext()) message("已定位匹配，点击“替换”执行。");
+        return 0;
     }
     cursor.insertText(ui->replaceEdit->text());editor->setTextCursor(cursor);
     findNext();message("已替换1处。");return 1;

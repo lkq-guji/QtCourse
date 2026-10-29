@@ -191,6 +191,15 @@ private slots:
         w.findChild<QSpinBox *>("fontSizeSpin")->setValue(18);
         QCOMPARE(w.editor()->toPlainText(),QString("显示格式测试"));QVERIFY(!w.editor()->document()->isModified());QVERIFY(w.editor()->lineNumberAreaWidth()>0);
     }
+    void wrappingAndLineNumberDigits()
+    {
+        MainWindow w;w.show();const int one=w.editor()->lineNumberAreaWidth();
+        QStringList lines;for(int i=0;i<120;++i)lines<<QString(200,'x');
+        w.editor()->setPlainText(lines.join('\n'));QCOMPARE(w.editor()->blockCount(),120);
+        QVERIFY(w.editor()->lineNumberAreaWidth()>one);
+        action(w,"Wrap")->trigger();QCOMPARE(w.editor()->blockCount(),120);
+        w.findChild<QSpinBox *>("fontSizeSpin")->setValue(24);QVERIFY(w.editor()->lineNumberAreaWidth()>one);
+    }
     void backupTimerDoesNotOverwriteOriginal()
     {
         QTemporaryDir dir;MainWindow w(dir.filePath("recovery"));const QString path=dir.filePath("original.txt");QString text,error;
@@ -230,6 +239,13 @@ private slots:
         QStringList lines;for(int i=1;i<=120;++i)lines<<QString("第%1行：文本编辑、自动换行与行号显示。").arg(i);
         w.editor()->setPlainText(lines.join('\n'));w.editor()->moveCursor(QTextCursor::End);QTest::qWait(80);QVERIFY(w.grab().save("12-line-numbers.png"));
         w.editor()->document()->setModified(false);
+        w.editor()->insertPlainText("未保存修改");
+        w.setAttribute(Qt::WA_DeleteOnClose,false);
+        QTimer::singleShot(100, [] { if(auto *box=qobject_cast<QMessageBox *>(QApplication::activeModalWidget())) {box->grab().save("13-close-warning.png");box->button(QMessageBox::Cancel)->click();} });
+        QVERIFY(!w.close());
+        QTimer::singleShot(100, [] { if(auto *box=qobject_cast<QMessageBox *>(QApplication::activeModalWidget())) {box->grab().save("14-open-error.png");box->button(QMessageBox::Ok)->click();} });
+        w.openPath(QDir::current().absoluteFilePath("不存在的文件.txt"));
+        QVERIFY(w.backupNow());QVERIFY(w.grab().save("15-backup.png"));w.editor()->document()->setModified(false);
     }
 };
 QTEST_MAIN(EditorTest)

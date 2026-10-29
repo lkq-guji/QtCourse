@@ -14,6 +14,9 @@ bool DocumentIO::decode(const QByteArray &bytes, QString &text, QString &error)
     if (bytes.startsWith(QByteArray::fromHex("efbbbf"))) skip = 3;
     else if (bytes.startsWith(QByteArray::fromHex("fffe"))) { encoding = QStringConverter::Utf16LE;skip = 2; }
     else if (bytes.startsWith(QByteArray::fromHex("feff"))) { encoding = QStringConverter::Utf16BE;skip = 2; }
+    if (encoding != QStringConverter::Utf8 && (bytes.size() - skip) % 2 != 0) {
+        error = "UTF-16文件不完整：字符数据必须为偶数字节。";return false;
+    }
     QStringDecoder decoder(encoding, QStringConverter::Flag::Stateless);
     const QString decoded = decoder(QByteArrayView(bytes).sliced(skip));
     if (decoder.hasError()) { error = "文本编码无效。请使用 UTF-8，或带 BOM 的 UTF-16 文件。";return false; }

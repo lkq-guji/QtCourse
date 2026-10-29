@@ -30,7 +30,10 @@ bool DocumentIO::decode(const QByteArray &bytes, QString &text, QString &error)
 bool DocumentIO::read(const QString &path, QString &text, QString &error)
 {
     error.clear();QFile file(path);
-    if (!QFileInfo(path).isFile() || !file.open(QIODevice::ReadOnly)) {
+    if (!QFileInfo(path).isFile()) {
+        error = "文件不存在或不是普通文件：" + path;return false;
+    }
+    if (!file.open(QIODevice::ReadOnly)) {
         error = "无法打开文件：" + path + "\n" + file.errorString();return false;
     }
     if (file.size() > MaxBytes) { error = "文件超过20 MiB，请使用适合大文件的编辑器。";return false; }

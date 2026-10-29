@@ -93,6 +93,7 @@ private slots:
         const QString good = dir.filePath("good.txt"), bad = dir.filePath("bad.txt");
         QVERIFY(DocumentIO::write(good, "existing", error));QVERIFY(w.loadFile(good));
         QVERIFY(!w.loadFile(dir.filePath("missing.txt")));QCOMPARE(w.editor()->toPlainText(), QString("existing"));QCOMPARE(w.currentFile(), good);
+        QVERIFY(w.lastError().contains("文件不存在"));QVERIFY(!w.lastError().contains("Unknown error"));
         QFile f(bad);QVERIFY(f.open(QIODevice::WriteOnly));f.write(QByteArray::fromHex("ff00"));f.close();
         QVERIFY(!w.loadFile(bad));QCOMPARE(w.editor()->toPlainText(), QString("existing"));QVERIFY(!w.isWindowModified());
     }

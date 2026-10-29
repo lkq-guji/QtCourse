@@ -10,6 +10,7 @@
 | [chapter02-about](https://github.com/lkq-guji/QtCourse/tree/chapter02-about) | 工具栏 About 按钮、个人信息弹窗 | `samp2_4App/samp2_4.pro` |
 | [chapter04-tablewidget](https://github.com/lkq-guji/QtCourse/tree/chapter04-tablewidget) | 五人七列表格、本人红色粗体、籍贯关联与状态栏 | `samp4_13TableWidget/samp4_13.pro` |
 | [experiment01-calculator](https://github.com/lkq-guji/QtCourse/tree/experiment01-calculator) | 实验一：键盘计算器、回归测试、实验报告 | `calculator/calculator.pro` |
+| [codex/experiment02-texteditor](https://github.com/lkq-guji/QtCourse/tree/codex/experiment02-texteditor) | 实验二：多窗口文本编辑器、查找替换、行号、恢复备份 | `texteditor/texteditor.pro` |
 
 ## 下载和运行
 
@@ -37,5 +38,7 @@ git switch chapter02-about
 第四章以提供的 `samp4_13TableWidget` 工程完成题目所称的 samp4_9 表格任务。数据来源、实现讲解和验证结果见该分支 README。
 
 实验一实现 Designer 界面、统一键鼠输入、四则运算状态机和异常处理；最终28项测试通过，分支保留8次实验开发提交、失败及修复日志、填写完成的学校模板报告和150秒连续测试视频。
+
+实验二使用 Designer 和 Action Editor，支持独立文档窗口、文件操作、查找替换、编辑状态联动、可隐藏行号及60秒恢复备份。35项回归测试通过。源码和录屏流程见实验二分支，实验报告及截图在本地保存，测试视频由本人录制。
 
 各作业分支保存可重新构建的源码。构建目录、Qt Creator 个人配置和整份原始点名册保留在本地。主分支调整采用正常提交，保留历史，无需强制推送。

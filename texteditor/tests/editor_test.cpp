@@ -235,7 +235,7 @@ private slots:
         w.findChild<QSpinBox *>("fontSizeSpin")->setValue(15);QVERIFY(w.grab().save("07-format.png"));
         action(w,"Toolbar")->trigger();action(w,"Statusbar")->trigger();QVERIFY(w.grab().save("08-view.png"));action(w,"Toolbar")->trigger();action(w,"Statusbar")->trigger();
         w.editor()->setTextBackgroundColor({});w.editor()->setEditorColors(Qt::black,Qt::white);w.findChild<QSpinBox *>("fontSizeSpin")->setValue(12);
-        qApp->clipboard()->setText("");QCoreApplication::processEvents();QVERIFY(w.grab().save("09-actions.png"));
+        QCoreApplication::processEvents();QVERIFY(w.grab().save("09-actions.png"));
         QStringList lines;for(int i=1;i<=120;++i)lines<<QString("第%1行：文本编辑、自动换行与行号显示。").arg(i);
         w.editor()->setPlainText(lines.join('\n'));w.editor()->moveCursor(QTextCursor::End);QTest::qWait(80);QVERIFY(w.grab().save("12-line-numbers.png"));
         w.editor()->document()->setModified(false);

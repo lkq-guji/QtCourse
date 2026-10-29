@@ -30,3 +30,5 @@ qrc_*.cpp
 /artifacts/
 /deliverables/
 /视频教学/
+
+/test-build/

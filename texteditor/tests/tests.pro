@@ -1,0 +1,9 @@
+QT += widgets testlib
+CONFIG += testcase console c++17
+TARGET = editor_test
+TEMPLATE = app
+INCLUDEPATH += ..
+SOURCES += editor_test.cpp ../mainwindow.cpp ../codeeditor.cpp ../documentio.cpp ../searchdialog.cpp
+HEADERS += ../mainwindow.h ../codeeditor.h ../documentio.h ../searchdialog.h
+FORMS += ../mainwindow.ui ../searchdialog.ui ../aboutdialog.ui
+RESOURCES += ../resources.qrc
